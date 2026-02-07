@@ -1,0 +1,8 @@
+{:paths ["src"]
+ :deps  {org.clojure/clojure            {:mvn/version "1.12.0"}
+         io.pedestal/pedestal.service   {:mvn/version "0.8.1"}
+         io.pedestal/pedestal.route     {:mvn/version "0.8.1"}
+         io.pedestal/pedestal.jetty     {:mvn/version "0.8.1"}
+         cheshire/cheshire              {:mvn/version "5.13.0"}}
+ :aliases
+ {:run {:main-opts ["-m" "counter.backend.server"]}}}

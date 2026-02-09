@@ -1,0 +1,67 @@
+####################################
+# Sistema operacional
+####################################
+# Windows
+Thumbs.db
+Desktop.ini
+
+####################################
+# IDEs / Editores
+####################################
+.vscode/
+!.vscode/extensions.json
+
+.idea/
+*.iml
+
+####################################
+# Clojure / Backend
+####################################
+# Cache de classpath
+.cpcache/
+
+# Caches e ferramentas de análise
+.clj-kondo/
+.clj-kondo.cache/
+.lsp/
+.calva/
+
+# REPL / ferramentas
+.nrepl-port
+.rebel_readline_history
+
+####################################
+# Frontend (Node / Vite / React)
+####################################
+node_modules/
+dist/
+.vite/
+
+####################################
+# Logs
+####################################
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+####################################
+# Variáveis de ambiente
+####################################
+.env
+.env.*
+!.env.example
+
+####################################
+# Arquivos temporários
+####################################
+*.tmp
+*.swp
+*.swo
+
+####################################
+# ZIPs e arquivos gerados
+####################################
+*.zip
+*.tar
+*.tar.gz

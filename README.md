@@ -44,7 +44,7 @@ O frontend consome a API via chamadas HTTP e atualiza a interface com base no es
 
 ### 🔹 Backend
 
-Na raiz do projeto:
+Entre na pasta do backend:
 
 ```bash
 clj -M:run

@@ -101,12 +101,12 @@ export default function App() {
           display: "flex",
           alignItems: "center",
           justifyContent: "center",
-          background: "linear-gradient(135deg, #1e3a8a 0%, #1e40af 50%, #3730a3 100%)",
+          background: "var(--gradient-primary)",
           fontFamily:
             "-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif",
         }}
       >
-        <div style={{ textAlign: "center", color: "white" }}>
+        <div style={{ textAlign: "center", color: "var(--color-white)" }}>
           <div
             style={{
               fontSize: "48px",
@@ -117,12 +117,6 @@ export default function App() {
             ⏳
           </div>
           <div style={{ fontSize: "18px", fontWeight: "500" }}>Carregando...</div>
-          <style>{`
-            @keyframes spin {
-              from { transform: rotate(0deg); }
-              to { transform: rotate(360deg); }
-            }
-          `}</style>
         </div>
       </div>
     );
@@ -136,7 +130,7 @@ export default function App() {
         display: "flex",
         alignItems: "center",
         justifyContent: "center",
-        background: "linear-gradient(135deg, #1e3a8a 0%, #1e40af 50%, #3730a3 100%)",
+        background: "var(--gradient-primary)",
         fontFamily:
           "-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif",
         padding: "24px",
@@ -152,7 +146,7 @@ export default function App() {
           padding: "48px 40px",
           maxWidth: "500px",
           width: "100%",
-          boxShadow: "0 20px 60px rgba(0, 0, 0, 0.3)",
+          boxShadow: "0 20px 60px var(--shadow-card)",
           border: "1px solid rgba(255, 255, 255, 0.3)",
         }}
       >
@@ -163,14 +157,14 @@ export default function App() {
               style={{
                 fontSize: "32px",
                 fontWeight: "700",
-                background: "linear-gradient(135deg, #1e3a8a 0%, #3730a3 100%)",
+                background: "var(--gradient-text)",
                 WebkitBackgroundClip: "text",
                 WebkitTextFillColor: "transparent",
                 backgroundClip: "text",
                 margin: 0,
               }}
             >
-              ✨ Contador
+              🍀 Contador
             </h1>
             <div
               style={{
@@ -179,7 +173,7 @@ export default function App() {
                 gap: "8px",
                 fontSize: "13px",
                 fontWeight: "500",
-                color: isConnected ? "#059669" : "#dc2626",
+                color: isConnected ? "var(--color-success-dark)" : "var(--color-error-dark)",
               }}
             >
               <div
@@ -187,7 +181,7 @@ export default function App() {
                   width: "8px",
                   height: "8px",
                   borderRadius: "50%",
-                  background: isConnected ? "#10b981" : "#ef4444",
+                  background: isConnected ? "var(--color-success)" : "var(--color-error)",
                   boxShadow: isConnected
                     ? "0 0 8px rgba(16, 185, 129, 0.6)"
                     : "0 0 8px rgba(239, 68, 68, 0.6)",
@@ -202,11 +196,11 @@ export default function App() {
         {/* Counter Display */}
         <div
           style={{
-            background: "linear-gradient(135deg, #1e3a8a 0%, #3730a3 100%)",
+            background: "var(--gradient-text)",
             borderRadius: "16px",
             padding: "40px",
             marginBottom: "24px",
-            boxShadow: "0 8px 24px rgba(30, 58, 138, 0.5)",
+            boxShadow: "0 8px 24px var(--shadow-primary)",
             position: "relative",
             overflow: "hidden",
           }}
@@ -216,7 +210,7 @@ export default function App() {
             style={{
               fontSize: "72px",
               fontWeight: "800",
-              color: "white",
+              color: "var(--color-white)",
               textAlign: "center",
               letterSpacing: "-2px",
               animation: "pulse 0.4s ease-out",
@@ -239,8 +233,8 @@ export default function App() {
             disabled={loading}
             onClick={increment}
             style={{
-              background: loading ? "#9ca3af" : "linear-gradient(135deg, #1e3a8a 0%, #3730a3 100%)",
-              color: "white",
+              background: loading ? "var(--color-gray-400)" : "var(--gradient-text)",
+              color: "var(--color-white)",
               border: "none",
               borderRadius: "12px",
               padding: "16px 24px",
@@ -248,20 +242,20 @@ export default function App() {
               fontWeight: "600",
               cursor: loading ? "not-allowed" : "pointer",
               transition: "all 0.2s ease",
-              boxShadow: loading ? "none" : "0 4px 12px rgba(30, 58, 138, 0.5)",
+              boxShadow: loading ? "none" : "0 4px 12px var(--shadow-primary)",
               transform: loading ? "scale(0.98)" : "scale(1)",
               opacity: loading ? 0.6 : 1,
             }}
             onMouseEnter={(e) => {
               if (!loading) {
                 e.currentTarget.style.transform = "scale(1.02) translateY(-2px)";
-                e.currentTarget.style.boxShadow = "0 6px 20px rgba(30, 58, 138, 0.6)";
+                e.currentTarget.style.boxShadow = "0 6px 20px var(--shadow-primary-hover)";
               }
             }}
             onMouseLeave={(e) => {
               if (!loading) {
                 e.currentTarget.style.transform = "scale(1)";
-                e.currentTarget.style.boxShadow = "0 4px 12px rgba(30, 58, 138, 0.5)";
+                e.currentTarget.style.boxShadow = "0 4px 12px var(--shadow-primary)";
               }
             }}
           >
@@ -272,9 +266,9 @@ export default function App() {
             disabled={loading}
             onClick={reset}
             style={{
-              background: loading ? "#f3f4f6" : "white",
-              color: loading ? "#9ca3af" : "#1e3a8a",
-              border: "2px solid #1e3a8a",
+              background: loading ? "var(--color-gray-100)" : "var(--color-white)",
+              color: loading ? "var(--color-gray-400)" : "var(--color-primary-dark)",
+              border: "2px solid var(--color-primary-dark)",
               borderRadius: "12px",
               padding: "14px 20px",
               fontSize: "15px",
@@ -285,15 +279,15 @@ export default function App() {
             }}
             onMouseEnter={(e) => {
               if (!loading) {
-                e.currentTarget.style.background = "#1e3a8a";
-                e.currentTarget.style.color = "white";
+                e.currentTarget.style.background = "var(--color-primary-dark)";
+                e.currentTarget.style.color = "var(--color-white)";
                 e.currentTarget.style.transform = "translateY(-2px)";
               }
             }}
             onMouseLeave={(e) => {
               if (!loading) {
-                e.currentTarget.style.background = "white";
-                e.currentTarget.style.color = "#1e3a8a";
+                e.currentTarget.style.background = "var(--color-white)";
+                e.currentTarget.style.color = "var(--color-primary-dark)";
                 e.currentTarget.style.transform = "translateY(0)";
               }
             }}
@@ -306,8 +300,8 @@ export default function App() {
         {error && (
           <div
             style={{
-              background: "#fee2e2",
-              border: "1px solid #fecaca",
+              background: "var(--color-bg-error)",
+              border: "1px solid var(--color-bg-error-border)",
               borderRadius: "12px",
               padding: "12px 16px",
               marginBottom: "20px",
@@ -330,37 +324,37 @@ export default function App() {
         {/* Footer Info */}
         <div
           style={{
-            background: "#f9fafb",
+            background: "var(--color-gray-50)",
             borderRadius: "12px",
             padding: "16px",
             fontSize: "13px",
-            color: "#6b7280",
+            color: "var(--color-gray-500)",
             lineHeight: "1.6",
           }}
         >
           <div style={{ marginBottom: "8px" }}>
-            <strong style={{ color: "#374151" }}>Backend:</strong>{" "}
+            <strong style={{ color: "var(--color-gray-700)" }}>Backend:</strong>{" "}
             <code
               style={{
-                background: "white",
+                background: "var(--color-white)",
                 padding: "2px 8px",
                 borderRadius: "6px",
                 fontSize: "12px",
-                border: "1px solid #e5e7eb",
+                border: "1px solid var(--color-gray-200)",
               }}
             >
               http://localhost:3000
             </code>
           </div>
           <div>
-            <strong style={{ color: "#374151" }}>Frontend:</strong>{" "}
+            <strong style={{ color: "var(--color-gray-700)" }}>Frontend:</strong>{" "}
             <code
               style={{
-                background: "white",
+                background: "var(--color-white)",
                 padding: "2px 8px",
                 borderRadius: "6px",
                 fontSize: "12px",
-                border: "1px solid #e5e7eb",
+                border: "1px solid var(--color-gray-200)",
               }}
             >
               http://localhost:5173
@@ -369,6 +363,43 @@ export default function App() {
         </div>
 
         <style>{`
+          :root {
+            /* Primary Colors */
+            --color-primary-dark: #14532d;
+            --color-primary-main: #166534;
+            --color-primary-light: #15803d;
+            
+            /* Status Colors */
+            --color-success: #10b981;
+            --color-success-dark: #059669;
+            --color-error: #ef4444;
+            --color-error-dark: #dc2626;
+            --color-warning: #fbbf24;
+            --color-warning-dark: #f59e0b;
+            
+            /* Neutral Colors */
+            --color-white: #ffffff;
+            --color-gray-50: #f9fafb;
+            --color-gray-100: #f3f4f6;
+            --color-gray-200: #e5e7eb;
+            --color-gray-400: #9ca3af;
+            --color-gray-500: #6b7280;
+            --color-gray-700: #374151;
+            
+            /* Background Colors */
+            --color-bg-error: #fee2e2;
+            --color-bg-error-border: #fecaca;
+            
+            /* Shadows */
+            --shadow-primary: rgba(30, 58, 138, 0.5);
+            --shadow-primary-hover: rgba(30, 58, 138, 0.6);
+            --shadow-card: rgba(0, 0, 0, 0.3);
+            
+            /* Gradients */
+            --gradient-primary: linear-gradient(135deg, var(--color-primary-dark) 0%, var(--color-primary-main) 50%, var(--color-primary-light) 100%);
+            --gradient-text: linear-gradient(135deg, var(--color-primary-dark) 0%, var(--color-primary-light) 100%);
+          }
+
           @keyframes pulse {
             0% {
               transform: scale(1);
@@ -399,6 +430,11 @@ export default function App() {
             50% {
               opacity: 0.5;
             }
+          }
+
+          @keyframes spin {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
           }
         `}</style>
       </div>

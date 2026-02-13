@@ -311,6 +311,78 @@ test('increments counter on button click', async () => {
 
 ---
 
+## 🎨 Customização de Tema
+
+A aplicação utiliza **CSS Variables** (design tokens) para facilitar a personalização de cores. Todas as cores estão centralizadas no `:root` do componente.
+
+### Como Mudar o Tema
+
+No arquivo `App.tsx`, localize a seção `<style>` e modifique as variáveis CSS:
+
+```css
+:root {
+  /* Primary Colors - Mude estas para alterar o tema principal */
+  --color-primary-dark: #1e3a8a;    /* Azul escuro */
+  --color-primary-main: #1e40af;     /* Azul médio */
+  --color-primary-light: #3730a3;    /* Azul roxeado */
+  
+  /* ... outras variáveis */
+}
+```
+
+### Exemplos de Temas Alternativos
+
+#### 🟢 Tema Verde (Sustentabilidade)
+```css
+--color-primary-dark: #065f46;
+--color-primary-main: #047857;
+--color-primary-light: #059669;
+```
+
+#### 🟣 Tema Roxo (Criatividade)
+```css
+--color-primary-dark: #6b21a8;
+--color-primary-main: #7c3aed;
+--color-primary-light: #8b5cf6;
+```
+
+#### 🔴 Tema Vermelho (Energia)
+```css
+--color-primary-dark: #991b1b;
+--color-primary-main: #dc2626;
+--color-primary-light: #ef4444;
+```
+
+#### ⚫ Tema Dark Mode (Profissional)
+```css
+--color-primary-dark: #1f2937;
+--color-primary-main: #374151;
+--color-primary-light: #4b5563;
+```
+
+### Variáveis Disponíveis
+
+| Variável | Uso | Valor Padrão |
+|----------|-----|--------------|
+| `--color-primary-dark` | Cor principal escura | `#1e3a8a` |
+| `--color-primary-main` | Cor principal | `#1e40af` |
+| `--color-primary-light` | Cor principal clara | `#3730a3` |
+| `--color-success` | Status conectado | `#10b981` |
+| `--color-error` | Status erro | `#ef4444` |
+| `--gradient-primary` | Gradiente de fundo | Auto-calculado |
+| `--gradient-text` | Gradiente do texto/contador | Auto-calculado |
+| `--shadow-primary` | Sombra dos botões | Auto-calculado |
+
+### Dica Profissional
+
+Os gradientes são calculados automaticamente baseados nas cores primárias:
+- **`--gradient-primary`**: Usado no fundo da página
+- **`--gradient-text`**: Usado no título e contador
+
+Você só precisa mudar as 3 cores primárias, e o resto se ajusta automaticamente! 🎨
+
+---
+
 ## 🔍 Observações para o Demo
 
 ### Pontos a Destacar
@@ -377,7 +449,7 @@ Se não usar proxy, configure CORS no Pedestal:
 
 ## 👤 Autor
 
-**Leonardo Moreno**  
+**Leonardo**  
 Teste técnico desenvolvido para demonstração de habilidades full-stack com Clojure e React.
 
 ---

@@ -1,8 +1,8 @@
 (ns counter.backend.server
   (:require
    [cheshire.core :as json]
-   [io.pedestal.http :as http]
-   [io.pedestal.http.route :as route]
+   [io.pedestal.connector :as conn]
+   [io.pedestal.http.jetty :as jetty]
    [io.pedestal.interceptor :as interceptor]))
 
 ;; ----------------------------
@@ -34,11 +34,6 @@
                            "Access-Control-Allow-Headers" "Content-Type"
                            "Access-Control-Allow-Credentials" "true"})))}))
 
-(defn options-handler [_]
-  {:status 204
-   :headers {"Access-Control-Allow-Methods" "GET,POST,OPTIONS"
-             "Access-Control-Allow-Headers" "Content-Type"}})
-
 ;; ----------------------------
 ;; Handlers
 ;; ----------------------------
@@ -49,30 +44,25 @@
   (json-response {:value (swap! counter* inc)}))
 
 (defn reset-counter [_]
-  (reset! counter* 0)
-  (json-response {:value 0}))
+  (json-response {:value (reset! counter* 0)}))
 
 ;; ----------------------------
-;; Routes
+;; Routes (table syntax; set is converted to RoutingFragment by with-routes)
 ;; ----------------------------
 (def routes
-  (route/expand-routes
-   #{["/api/counter" :get [cors-interceptor `get-counter] :route-name ::get-counter]
-     ["/api/counter/increment" :post [cors-interceptor `increment-counter] :route-name ::inc]
-     ["/api/counter/reset" :post [cors-interceptor `reset-counter] :route-name ::reset]
-
-     ;; preflight
-     ["/api/*path" :options [cors-interceptor `options-handler] :route-name ::options]}))
-
-(def service
-  {:env :dev
-   ::http/routes routes
-   ::http/type :jetty
-   ::http/port 3000
-   ::http/join? false})
+  #{["/api/counter" :get [cors-interceptor get-counter] :route-name ::get-counter]
+    ["/api/counter/increment" :post [cors-interceptor increment-counter] :route-name ::inc]
+    ["/api/counter/reset" :post [cors-interceptor reset-counter] :route-name ::reset]
+    ;; curl http://localhost:3000/api/counter
+    ;; curl -X POST http://localhost:3000/api/counter/increment
+    ;; curl -X POST http://localhost:3000/api/counter/reset
+    })
 
 (defn -main [& _]
-  (-> service
-      http/create-server
-      http/start)
-  (println "Backend on http://localhost:3000"))
+  (println "Backend on http://localhost:3000")
+  (-> (conn/default-connector-map 3000)
+      (assoc :join? true)
+      (conn/with-default-interceptors)
+      (conn/with-routes routes)
+      (jetty/create-connector nil)
+      (conn/start!)))

@@ -1,0 +1,87 @@
+:root {
+  /* Primary */
+  --color-primary-dark: #14532d;
+  --color-primary-main: #166534;
+  --color-primary-light: #15803d;
+
+  /* Status */
+  --color-success: #10b981;
+  --color-success-dark: #059669;
+  --color-error: #ef4444;
+  --color-error-dark: #dc2626;
+  --color-warning: #fbbf24;
+  --color-warning-dark: #f59e0b;
+
+  /* Neutral */
+  --color-white: #ffffff;
+  --color-gray-50: #f9fafb;
+  --color-gray-100: #f3f4f6;
+  --color-gray-200: #e5e7eb;
+  --color-gray-400: #9ca3af;
+  --color-gray-500: #6b7280;
+  --color-gray-700: #374151;
+
+  /* Backgrounds */
+  --color-bg-error: #fee2e2;
+  --color-bg-error-border: #fecaca;
+
+  /* Shadows */
+  --shadow-primary: rgba(30, 58, 138, 0.5);
+  --shadow-primary-hover: rgba(30, 58, 138, 0.6);
+  --shadow-card: rgba(0, 0, 0, 0.3);
+
+  /* Gradients */
+  --gradient-primary: linear-gradient(
+    135deg,
+    var(--color-primary-dark) 0%,
+    var(--color-primary-main) 50%,
+    var(--color-primary-light) 100%
+  );
+  --gradient-text: linear-gradient(
+    135deg,
+    var(--color-primary-dark) 0%,
+    var(--color-primary-light) 100%
+  );
+}
+
+@keyframes pulse {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.1);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes pulse-status {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.5;
+  }
+}
+
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}

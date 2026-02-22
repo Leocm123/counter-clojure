@@ -1,0 +1,28 @@
+.footer-info {
+  background: var(--color-gray-50);
+  border-radius: 12px;
+  padding: 16px;
+  font-size: 13px;
+  color: var(--color-gray-500);
+  line-height: 1.6;
+}
+
+.footer-info__row {
+  margin-bottom: 8px;
+}
+
+.footer-info__row:last-child {
+  margin-bottom: 0;
+}
+
+.footer-info__label {
+  color: var(--color-gray-700);
+}
+
+.footer-info__code {
+  background: var(--color-white);
+  padding: 2px 8px;
+  border-radius: 6px;
+  font-size: 12px;
+  border: 1px solid var(--color-gray-200);
+}

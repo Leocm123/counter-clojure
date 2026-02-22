@@ -1,0 +1,10 @@
+.counter-card {
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(10px);
+  border-radius: 24px;
+  padding: 48px 40px;
+  max-width: 500px;
+  width: 100%;
+  box-shadow: 0 20px 60px var(--shadow-card);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+}

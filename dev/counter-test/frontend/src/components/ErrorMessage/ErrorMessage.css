@@ -1,0 +1,15 @@
+.error-message {
+  background: var(--color-bg-error);
+  border: 1px solid var(--color-bg-error-border);
+  border-radius: 12px;
+  padding: 12px 16px;
+  margin-bottom: 20px;
+  animation: slideIn 0.3s ease-out;
+}
+
+.error-message__text {
+  color: #991b1b;
+  margin: 0;
+  font-size: 14px;
+  font-weight: 500;
+}

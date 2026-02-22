@@ -1,0 +1,18 @@
+.counter-display {
+  background: var(--gradient-text);
+  border-radius: 16px;
+  padding: 40px;
+  margin-bottom: 24px;
+  box-shadow: 0 8px 24px var(--shadow-primary);
+  position: relative;
+  overflow: hidden;
+}
+
+.counter-display__value {
+  font-size: 72px;
+  font-weight: 800;
+  color: var(--color-white);
+  text-align: center;
+  letter-spacing: -2px;
+  animation: pulse 0.4s ease-out;
+}

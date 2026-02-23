@@ -1,4 +1,4 @@
-# Guia: React, TypeScript, CSS e Tailwind
+# Guia: React, TypeScript e CSS
 
 ---
 
@@ -320,7 +320,7 @@ createRoot(document.getElementById("root")!).render(
 
 # Parte 2 — CSS no meu projeto
 
-O projeto **não usa Tailwind**; usa CSS puro com variáveis e um CSS por componente.
+O projeto usa **TypeScript** e **CSS puro** (variáveis e um CSS por componente).
 
 ## 1. Estrutura
 
@@ -376,101 +376,8 @@ className={`header__status header__status--${isConnected ? "connected" : "discon
 
 ---
 
-# Parte 3 — Tailwind CSS
-
-Tailwind não está instalado no projeto; esta parte é para você **estudar** e usar em outros projetos ou na entrevista.
-
-## 1. O que é Tailwind
-
-**Utility-first:** em vez de escrever CSS em arquivos separados, você aplica **classes** no HTML/JSX que já vêm prontas (margin, padding, cor, flex, grid, etc.). O build gera só o CSS que você usou.
-
-## 2. Instalação
-
-```bash
-npm install -D tailwindcss postcss autoprefixer
-npx tailwindcss init -p
-```
-
-No `tailwind.config.js` você configura content (onde o Tailwind vai procurar classes):
-
-```js
-content: ["./index.html", "./src/**/*.{js,ts,jsx,tsx}"],
-```
-
-No CSS global:
-
-```css
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
-```
-
-## 3. Padrão das classes
-
-- **Espaçamento:** `m-4` (margin), `p-4` (padding), `mt-2`, `px-6`, `gap-4`.
-- **Cores:** `bg-green-700`, `text-white`, `text-red-500`, `border-gray-200`.
-- **Tipografia:** `text-sm`, `text-lg`, `font-bold`, `font-semibold`.
-- **Layout:** `flex`, `flex-col`, `items-center`, `justify-between`, `grid`, `grid-cols-2`.
-- **Tamanhos:** `w-full`, `max-w-md`, `h-screen`, `rounded-lg`, `rounded-full`.
-- **Estado:** `hover:bg-green-800`, `disabled:opacity-50`, `focus:ring-2`.
-
-Números costumam seguir uma escala (1, 2, 4, 6, 8, 12, 16, 24… em múltiplos de 4 para espaços).
-
-## 4. Exemplo: botão no estilo do seu app
-
-Em vez de:
-
-```css
-.counter-buttons__increment {
-  background: var(--gradient-text);
-  color: white;
-  border-radius: 12px;
-  padding: 16px 24px;
-  font-size: 16px;
-  font-weight: 600;
-}
-```
-
-Com Tailwind:
-
-```tsx
-<button
-  className="bg-green-700 text-white rounded-xl py-4 px-6 text-base font-semibold
-             hover:bg-green-800 disabled:bg-gray-400 disabled:cursor-not-allowed"
->
-  Incrementar
-</button>
-```
-
-(Cores green-700/green-800 são aproximadas; você pode configurar no `theme` do Tailwind para bater com o seu design.)
-
-## 5. Responsividade
-
-Prefixos por breakpoint:
-
-- **sm:** 640px
-- **md:** 768px
-- **lg:** 1024px
-- **xl:** 1280px
-- **2xl:** 1536px
-
-Exemplo:
-
-```tsx
-<div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-```
-
-— 1 coluna no mobile, 2 no tablet, 3 no desktop.
-
-## 6. Vantagens e desvantagens
-
-- **Vantagens:** rápido prototipar, consistência, pouco CSS custom, purge no build (CSS enxuto).
-- **Desvantagens:** JSX pode ficar com muitas classes; designs muito específicos às vezes exigem `@apply` ou CSS à parte.
-
----
-
 ## Resumo final
 
 - **React:** componentes, props, estado (useState), efeitos (useEffect), custom hooks, condicionais, eventos, key.
+- **TypeScript:** tipagem de props e estado; tipos como `CounterCardProps`, `() => void`.
 - **CSS no projeto:** variáveis em `:root`, BEM-like, um CSS por componente, @keyframes.
-- **Tailwind:** utility-first, classes de espaçamento/cor/layout/estado, breakpoints; útil para estudo e para quando for usar em outro projeto.

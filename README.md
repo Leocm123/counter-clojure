@@ -1,257 +1,120 @@
-# 🧮 Counter Application – Clojure + Pedestal + React
+# 🧮 Counter Application
 
-Aplicação full-stack simples desenvolvida como teste técnico.
+Demo full-stack: **Clojure (Pedestal)** no backend e **React + TypeScript (Vite)** no frontend.
 
-O backend foi implementado em Clojure utilizando Pedestal, e o frontend em React com TypeScript (Vite).
-
-A aplicação expõe uma API HTTP com três operações:
-* 🔢 Obter valor atual do contador
-* ➕ Incrementar contador
-* 🔄 Resetar contador
-
-O estado do contador é mantido em memória utilizando um **atom**.
+Uma única tela com um contador: obter valor, incrementar e resetar. O estado fica em memória no backend (um **atom**).
 
 ---
 
-## 📌 Visão Geral da Arquitetura
+## 🚀 Como rodar
 
-### Backend
-* **Linguagem:** Clojure
-* **Framework HTTP:** Pedestal
-* **Servidor:** Jetty
-* **Estado:** atom em memória
-* **Serialização JSON:** Cheshire
+Escolha uma opção.
 
-O backend expõe endpoints REST e utiliza um interceptor de CORS para permitir comunicação com o frontend rodando em outra origem.
+### Com Docker (recomendado)
 
-### Frontend
-* React 18
-* TypeScript
-* Vite
-* Fetch API para comunicação com o backend
-* Tratamento de loading e erro
-
-O frontend consome a API via chamadas HTTP e atualiza a interface com base no estado retornado.
-
----
-
-## 🚀 Como Rodar o Projeto
-
-### 🔹 Pré-requisitos
-* Java 11+
-* Clojure CLI instalado (`clj`)
-* Node.js 16+
-
-### 🔹 Backend
-
-Entre na pasta do backend:
+**Requisito:** [Docker Desktop](https://www.docker.com/products/docker-desktop/) instalado e em execução.
 
 ```bash
+git clone <url-do-repositorio>
+cd counter-clojure
+docker compose up --build
+```
+
+Acesse **http://localhost:8080**. Para parar: `Ctrl+C` e depois `docker compose down`.
+
+### Sem Docker
+
+**Requisitos:** Java 11+, [Clojure CLI](https://clojure.org/guides/install_clojure) (`clj`), Node.js 16+.
+
+**Terminal 1 — backend:**
+```bash
+cd dev/counter-test/backend
 clj -M:run
 ```
+Backend em http://localhost:3000
 
-O servidor iniciará em:
-```
-http://localhost:3000
-```
-
-### 🔹 Frontend
-
-Entre na pasta do frontend:
-
+**Terminal 2 — frontend:**
 ```bash
-cd frontend
+cd dev/counter-test/frontend
 npm install
 npm run dev
 ```
-
-O frontend iniciará em:
-```
-http://localhost:5173
-```
+Frontend em http://localhost:5173
 
 ---
 
-## 🌐 API Endpoints
+## 🛠 Stack
 
-### `GET /api/counter`
-Retorna o valor atual do contador.
+| Camada   | Tecnologias |
+|----------|-------------|
+| Backend  | Clojure, Pedestal, Jetty, Cheshire (JSON) |
+| Frontend | React, TypeScript, Vite, CSS (variáveis + um CSS por componente) |
+| Deploy   | Docker Compose (backend + frontend com nginx) |
 
-**Response:**
-```json
-{
-  "value": 5
-}
-```
-
-### `POST /api/counter/increment`
-Incrementa o contador em 1.
-
-**Response:**
-```json
-{
-  "value": 6
-}
-```
-
-### `POST /api/counter/reset`
-Reseta o contador para 0.
-
-**Response:**
-```json
-{
-  "value": 0
-}
-```
+O frontend usa **TypeScript** e **CSS puro**. A API é REST; CORS está configurado para desenvolvimento local e para o proxy no Docker.
 
 ---
 
-## 🧠 Como Funciona Internamente
+## 🌐 API
 
-### 🔹 Estado com Atom
+| Método | Endpoint | Descrição |
+|--------|----------|-----------|
+| GET    | `/api/counter` | Valor atual do contador |
+| POST   | `/api/counter/increment` | Incrementa em 1 |
+| POST   | `/api/counter/reset` | Zera o contador |
 
-O contador é armazenado como:
-
-```clojure
-(defonce counter* (atom 0))
-```
-
-Atualização é feita com:
-
-```clojure
-(swap! counter* inc)
-```
-
-O uso de **`atom`** garante atualização atômica e segura para concorrência em um único processo.
-
-⚠️ **O estado é perdido ao reiniciar o servidor**, pois está apenas em memória.
-
-### 🔹 Fluxo de Requisição
-
-1. O frontend chama a API via `fetch`.
-2. O navegador pode enviar um preflight (OPTIONS) se necessário.
-3. O Pedestal recebe a requisição.
-4. O interceptor de CORS adiciona os headers necessários.
-5. O handler executa a lógica.
-6. O backend retorna JSON.
-7. O React atualiza o estado e re-renderiza a interface.
-
-### 🔐 CORS
-
-Foi implementado um interceptor para permitir comunicação entre:
-
-```
-Frontend → http://localhost:5173
-Backend  → http://localhost:3000
-```
-
-O interceptor:
-* Lê o header `Origin`
-* Armazena no contexto
-* Adiciona headers CORS na resposta
-* Trata requisições `OPTIONS` (preflight)
+Resposta em JSON: `{ "value": number }`.
 
 ---
 
-## 📁 Estrutura do Projeto
+## 📁 Estrutura
 
 ```
 counter-clojure/
-│
-├── deps.edn
-├── src/
-│   └── counter/
-│       └── backend/
-│           └── server.clj
-│
-├── frontend/
-│   ├── src/
-│   │   ├── App.tsx
-│   │   └── main.tsx
-│   ├── package.json
-│   ├── vite.config.ts
-│   └── ...
+├── docker-compose.yml          # Sobe backend + frontend
+├── dev/counter-test/
+│   ├── backend/
+│   │   ├── deps.edn
+│   │   ├── Dockerfile
+│   │   └── src/counter/backend/server.clj
+│   └── frontend/
+│       ├── package.json
+│       ├── Dockerfile
+│       ├── vite.config.ts
+│       ├── src/
+│       │   ├── App.tsx, main.tsx
+│       │   ├── api/, hooks/, components/
+│       │   └── styles/variables.css
+│       └── docs/               # Guias React/TypeScript/CSS
 ```
 
 ---
 
-## ⚖️ Decisão Técnica: Atom vs Datomic
+## 🧠 Detalhes técnicos
 
-Para este teste foi utilizada a solução simples com **`atom`** devido a:
-* Menor complexidade
-* Escopo reduzido da aplicação
-* Entrega focada na arquitetura e entendimento do fluxo
-
-Uma evolução possível seria utilizar **Datomic em memória** para persistência e histórico.
+- **Estado:** `(defonce counter* (atom 0))` no backend; atualização com `swap!`. Estado é perdido ao reiniciar o servidor.
+- **CORS:** interceptor no Pedestal que lê `Origin` e devolve os headers adequados.
+- **Docker:** backend escuta em `0.0.0.0:3000`; frontend (nginx) faz proxy de `/api` para o backend.
 
 ---
 
-## 🎨 Customização de Tema
+## 🎨 Tema
 
-A aplicação utiliza **CSS Variables** (design tokens) para facilitar a personalização de cores. Todas as cores estão centralizadas no `:root` do componente `App.tsx`.
-
-### Como Mudar o Tema
-
-No arquivo `App.tsx`, localize a seção `<style>` e modifique as variáveis CSS:
+Cores e gradientes estão em **`dev/counter-test/frontend/src/styles/variables.css`** (`:root`). Alterando as três cores primárias, o restante do tema acompanha:
 
 ```css
-:root {
-  /* Primary Colors - Mude estas para alterar o tema principal */
-  --color-primary-dark: #14532d;
-  --color-primary-main: #166534;
-  --color-primary-light: #15803d;
-
-  
-  /* ... outras variáveis */
-}
+--color-primary-dark: #14532d;
+--color-primary-main: #166534;
+--color-primary-light: #15803d;
 ```
 
-### Exemplos de Temas Alternativos
-
-#### 🌿 Tema Verde Esmeralda
-```css
---color-primary-dark: #065f46;
---color-primary-main: #059669;
---color-primary-light: #10b981;
-```
-
-#### 🔵 Tema Azul
-```css
-  --color-primary-dark: #1e3a8a;
-  --color-primary-main: #1e40af;
-  --color-primary-light: #3730a3;
-```
-#### 🟣 Tema Roxo
-```css
---color-primary-dark: #6b21a8;
---color-primary-main: #7c3aed;
---color-primary-light: #8b5cf6;
-```
-
-#### 🔴 Tema Vermelho
-```css
---color-primary-dark: #991b1b;
---color-primary-main: #dc2626;
---color-primary-light: #ef4444;
-```
-
-**Dica:** Os gradientes são calculados automaticamente. Você só precisa mudar as 3 cores primárias! 🎨
-
----
-
-## 🔍 Possíveis Melhorias
-
-* [ ] Persistência real (Datomic ou outro banco)
-* [ ] Testes automatizados (backend e frontend)
-* [ ] Separação de camadas no backend (handlers, services, state)
-* [ ] Deploy containerizado (Docker)
-* [ ] Logs estruturados
-* [ ] Rate limiting
-* [ ] Autenticação (JWT)
+Exemplos rápidos: 
+verde (`#065f46`, `#059669`, `#10b981`), 
+azul (`#1e3a8a`, `#1e40af`, `#3730a3`), 
+roxo (`#6b21a8`, `#7c3aed`, `#8b5cf6`).
 
 ---
 
 ## 👨‍💻 Autor
 
-**Leonardo Moreno**  
-Teste técnico – Counter Application
+**Leonardo Moreno** — Counter Application (demo)

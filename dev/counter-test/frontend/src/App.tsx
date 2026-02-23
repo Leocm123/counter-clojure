@@ -20,7 +20,7 @@ export default function App() {
   }
 
   return (
-    <div className="app min-h-screen w-screen flex items-center justify-center p-6">
+    <div className="app">
       <CounterCard
         value={value}
         pulseKey={pulseKey}

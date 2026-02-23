@@ -59,8 +59,8 @@
     })
 
 (defn -main [& _]
-  (println "Backend on http://localhost:3000")
-  (-> (conn/default-connector-map 3000)
+  (println "Backend on http://0.0.0.0:3000")
+  (-> (conn/default-connector-map "0.0.0.0" 3000)
       (assoc :join? true)
       (conn/with-default-interceptors)
       (conn/with-routes routes)

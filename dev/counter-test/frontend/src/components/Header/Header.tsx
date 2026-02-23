@@ -6,12 +6,12 @@ type HeaderProps = {
 
 export function Header({ isConnected }: HeaderProps) {
   return (
-    <header className="header flex items-center justify-between mb-8">
-      <h1 className="header__title text-3xl font-bold">🍀 Contador</h1>
+    <header className="header">
+      <h1 className="header__title">🍀 Contador</h1>
       <div
-        className={`header__status header__status--${isConnected ? "connected" : "disconnected"} flex items-center gap-2 text-sm font-medium`}
+        className={`header__status header__status--${isConnected ? "connected" : "disconnected"}`}
       >
-        <div className="header__status-dot w-2 h-2 rounded-full" />
+        <div className="header__status-dot" />
         {isConnected ? "Conectado" : "Desconectado"}
       </div>
     </header>

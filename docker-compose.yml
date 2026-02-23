@@ -1,0 +1,18 @@
+services:
+  backend:
+    build:
+      context: ./dev/counter-test/backend
+      dockerfile: Dockerfile
+    container_name: counter-backend
+    ports:
+      - "3000:3000"
+
+  frontend:
+    build:
+      context: ./dev/counter-test/frontend
+      dockerfile: Dockerfile
+    container_name: counter-frontend
+    ports:
+      - "8080:80"
+    depends_on:
+      - backend

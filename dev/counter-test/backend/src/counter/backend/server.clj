@@ -51,7 +51,7 @@
   (json-response {:value (reset! counter* 0)}))
 
 ;; ----------------------------
-;; Routes (table syntax; set is converted to RoutingFragment by with-routes)
+;; Routes
 ;; ----------------------------
 (def routes
   #{["/api/counter" :get [cors-interceptor get-counter] :route-name ::get-counter]

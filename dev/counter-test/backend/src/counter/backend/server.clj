@@ -10,21 +10,24 @@
 ;; ----------------------------
 (defonce counter* (atom 0))
 
+;; website usa JSON, então precisamos de uma função para converter EDN em respostas JSON
 (defn json-response [m]
   {:status 200
    :headers {"Content-Type" "application/json; charset=utf-8"}
    :body (json/generate-string m)})
 
 ;; ----------------------------
-;; CORS correto (não pode setar :response no :enter)
+;; CORS (não pode setar :response no :enter)
 ;; ----------------------------
 (def cors-interceptor
   (interceptor/interceptor
    {:name ::cors
+    ;; identtifica de onde vem o pedido (origin) e guarda no ctx, para usar na resposta
     :enter (fn [ctx]
              ;; guarda o origin no ctx (não cria response aqui)
              (let [origin (get-in ctx [:request :headers "origin"] "*")]
                (assoc ctx ::origin origin)))
+    ;; na resposta, pega o origin do ctx e seta os headers CORS
     :leave (fn [ctx]
              (let [origin (::origin ctx "*")]
                (update-in ctx [:response :headers]
@@ -53,9 +56,9 @@
   #{["/api/counter" :get [cors-interceptor get-counter] :route-name ::get-counter]
     ["/api/counter/increment" :post [cors-interceptor increment-counter] :route-name ::inc]
     ["/api/counter/reset" :post [cors-interceptor reset-counter] :route-name ::reset]
-    ;; curl http://localhost:3000/api/counter
-    ;; curl -X POST http://localhost:3000/api/counter/increment
-    ;; curl -X POST http://localhost:3000/api/counter/reset
+    ;; curl.exe http://localhost:3000/api/counter
+    ;; curl.exe -X POST http://localhost:3000/api/counter/increment
+    ;; curl.exe -X POST http://localhost:3000/api/counter/reset
     })
 
 (defn -main [& _]

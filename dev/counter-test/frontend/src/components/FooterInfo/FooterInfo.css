@@ -15,6 +15,11 @@
   margin-bottom: 0;
 }
 
+.footer-info__hint {
+  font-size: 12px;
+  color: var(--color-gray-500);
+}
+
 .footer-info__label {
   color: var(--color-gray-700);
 }

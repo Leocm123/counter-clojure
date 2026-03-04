@@ -42,6 +42,7 @@
 ;; ----------------------------
 (defn get-counter [_]
   (json-response {:value @counter*}))
+;;atalho drefer
 
 (defn increment-counter [_]
   (json-response {:value (swap! counter* inc)}))
